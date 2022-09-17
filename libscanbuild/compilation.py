@@ -30,6 +30,7 @@ IGNORED_FLAGS = {
     # compiling only flag, ignored because the creator of compilation
     # database will explicitly set it.
     '-c': 0,
+    '-S': 0,
     # preprocessor macros, ignored because would cause duplicate entries in
     # the output (the only difference would be these flags). this is actual
     # finding from users, who suffered longer execution time caused by the
@@ -254,7 +255,7 @@ class Compilation:
         args = iter(compiler_and_arguments[1])
         for arg in args:
             # quit when compilation pass is not involved
-            if arg in {'-E', '-S', '-cc1', '-M', '-MM', '-###'}:
+            if arg in {'-E', '-cc1', '-M', '-MM', '-###'}:
                 return None
             # ignore some flags
             elif arg in IGNORED_FLAGS:
